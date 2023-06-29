@@ -6,6 +6,8 @@ createApp({
       products: [],
       product: {},
       carts: [],
+      editQuantity: 0,
+      editPrice: 0,
     };
   },
 
@@ -29,7 +31,7 @@ createApp({
 
   methods: {
     removeCart(id) {
-      if (confirm("Are you want to remove this?")) {
+      if (confirm("Are you sure you want to remove this?")) {
         const data = new FormData();
         data.append("method", "removeCart");
         data.append("id", id);
@@ -39,7 +41,7 @@ createApp({
             this.displayCarts();
           } else {
             console.log(res.data);
-            alert("Something went wrong please try again later!");
+            alert("Something went wrong. Please try again later!");
           }
         });
       }
@@ -62,7 +64,7 @@ createApp({
           this.displayCarts();
         } else {
           console.log(res.data);
-          alert("something went wrong please try again!");
+          alert("Something went wrong. Please try again!");
         }
       });
     },
@@ -83,7 +85,7 @@ createApp({
           this.displayProducts();
         } else {
           console.log(res.data);
-          alert("Something went wrong please try again later!");
+          alert("Something went wrong. Please try again later!");
         }
       });
     },
@@ -106,5 +108,34 @@ createApp({
         }
       });
     },
+editProduct(product) {
+  this.product = product;
+  this.editQuantity = product.quantity;
+  this.editPrice = product.price;
+  var modal = document.getElementById("editProduct");
+  var modalInstance = new bootstrap.Modal(modal);
+  modalInstance.show();
+},
+saveChanges() {
+  const data = new FormData();
+  data.append("method", "editProduct");
+  data.append("id", this.product.id);
+  data.append("quantity", this.editQuantity);
+  data.append("price", this.editPrice);
+  axios.post("../api/index.php", data).then((res) => {
+    if (res.data == 1) {
+      alert("Changes have been saved!");
+      this.displayProducts();
+      var modal = document.getElementById("editProductConfirmation");
+      var modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+    } else {
+      console.log(res.data);
+      alert("Something went wrong. Please try again later!");
+    }
+  });
+  // Refresh the page
+  window.location.reload();
+},
   },
 }).mount("#app");

@@ -45,3 +45,23 @@ function deleteProduct() {
   }
   $query->close();
 }
+
+function editProduct() {
+  global $con;
+  $id = $_POST['id'];
+  $quantity = $_POST['quantity'];
+  $price = $_POST['price'];
+
+  $sql = 'CALL updateProduct(?, ?, ?)';
+  $query = $con->prepare($sql);
+  $query->bind_param('iii', $id, $quantity, $price);
+  $query->execute();
+
+  if ($query->affected_rows >= 1) {
+    echo 1;
+  } else {
+    echo 0;
+  }
+
+  $query->close();
+}

@@ -132,11 +132,11 @@ include './shared/head.php';
                   </a>
 
                   <h5 class="sold text-content">
-                    <span class="theme-color price">₱26.69</span>
+                    <span class="theme-color price">₱ {{ product.price }}</span>
                   </h5>
 
                   <div class="product-rating mt-2">
-                    <h6 class="theme-color">In Stock</h6>
+                    <h6 class="theme-color">Stock {{ product.quantity }}</h6>
                   </div>
 
                 </div>

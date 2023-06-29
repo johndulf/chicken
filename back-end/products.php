@@ -116,6 +116,11 @@
 
                             <td>
                               <ul>
+                                          <li>
+              <a href="javascript:void(0)" @click="editProduct(product)">
+                <i class="ri-edit-line"></i>
+              </a>
+            </li>
                                 <li>
                                   <a href="javascript:void(0)"
                                     @click="getProduct(product)">

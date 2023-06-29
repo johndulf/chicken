@@ -14,6 +14,7 @@ createApp({
         if (res.data == 1) {
           alert("Added successfully!");
           e.target.reset();
+          window.location.href = "../back-end/products.php";
         } else {
           console.log(res.data);
           alert(res.data);
