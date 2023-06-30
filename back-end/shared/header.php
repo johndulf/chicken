@@ -30,7 +30,7 @@
           </span>
         </li>
 
-        <li class="profile-nav onhover-dropdown pe-0 me-0">
+        <!-- <li class="profile-nav onhover-dropdown pe-0 me-0">
           <div class="media profile-media">
             <div class="user-name-hide media-body">
               <span>
@@ -59,7 +59,7 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </div>

@@ -15,11 +15,10 @@
             <div class="notification-slider">
               <div>
                 <div class="timer-notification">
-                  <h6>
-                    <strong class="me-1">Welcome to CFC - Crispy Fried Chicken</strong>
-                    Order your favorite Crispy Fried Chicken now!
+                    <strong class="me-1">Welcome to CFC - Crispy Fried Chicken
+                    Order your favorite Crispy Fried Chicken now!</strong>
                     
-                  </h6>
+  
                 </div>
               </div>
 
@@ -61,6 +60,7 @@
                     
                     <span
                         class="position-absolute top-0 start-100 translate-middle badge">
+                        <!-- {{ isFavoritesPage ? favorite.length : products.length }} -->
                         {{ products.length}}
                         <span class="visually-hidden">unread messages</span>
                       </span>
@@ -139,6 +139,9 @@
                     <ul class="user-box-name">
 
                       <?php if(isset($_SESSION['id']) &&  $_SESSION['id']): ?>
+                        <li class="product-box-contain">
+                        <a href="../front-end/profile.php">Profile</a>
+                      </li>
                       <li class="product-box-contain">
                         <a href="../logout.php">Logout</a>
                       </li>

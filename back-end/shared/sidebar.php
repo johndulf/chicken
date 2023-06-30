@@ -48,7 +48,7 @@
 
               <li class="sidebar-list">
                 <a class="sidebar-link sidebar-title text-white"
-                  href="../logout.php">Logout</a>
+                 data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
               </li>
             </ul>
           </div>
@@ -59,3 +59,9 @@
         </nav>
       </div>
     </div>
+
+    <div class="container-fluid">
+          <!-- footer start-->
+          <?php 
+            include './modals/logoutModal.php'; ?>
+        </div>

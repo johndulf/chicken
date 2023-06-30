@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 05:25 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jun 29, 2023 at 08:04 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -50,6 +50,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteProduct` (IN `p_user_id` INT)
 	UPDATE products 
     SET deleted_at = NOW() 
     WHERE id = p_user_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `p_id` INT)   BEGIN
+    DELETE FROM users WHERE id = p_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `displayAllUser` ()   SELECT *
@@ -166,10 +170,26 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `updateFavorites` (IN `p_user_id` IN
   END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateProduct` (IN `p_id` INT, IN `p_quantity` INT, IN `p_price` INT)   BEGIN
+  UPDATE products
+  SET quantity = p_quantity, price = p_price
+  WHERE id = p_id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateQuantity` (IN `p_quantity` INT, IN `p_id` INT)   BEGIN
 	UPDATE carts
     SET quantity = p_quantity
     WHERE id = p_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `p_id` INT, IN `p_fullname` VARCHAR(255), IN `p_mobile` VARCHAR(255), IN `p_email` VARCHAR(255))   BEGIN
+    UPDATE users
+    SET
+        fullname = p_fullname,
+        mobile = p_mobile,
+        email = p_email
+    WHERE
+        id = p_id;
 END$$
 
 DELIMITER ;
@@ -228,7 +248,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `user_id`, `name`, `description`, `quantity`, `price`, `images`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(10, 14, 'sample', 'ddsdsd', 23, 232323, '[\"product-sample-85981.png\",\"product-sample-96709.png\",\"product-sample-80224.png\"]', '2023-05-25 15:21:08', '2023-05-25 15:21:08', NULL);
+(22, 22, 'amaw', '22', 33, 22, '[\"product-amaw-68903.png\"]', '2023-06-29 05:14:46', '2023-06-29 05:14:46', '2023-06-29 05:16:46'),
+(23, 22, 'aw aw aw', '2', 2, 2, '[\"product-aw aw aw-82910.png\"]', '2023-06-29 05:15:27', '2023-06-29 05:15:27', '2023-06-29 05:16:43'),
+(24, 22, '2', '2', 2, 2, '[\"product-2-55933.png\"]', '2023-06-29 05:15:50', '2023-06-29 05:15:50', '2023-06-29 05:16:39'),
+(25, 22, '2', '2', 2, 2, '[\"product-2-66068.png\"]', '2023-06-29 05:15:59', '2023-06-29 05:15:59', '2023-06-29 05:16:36'),
+(26, 22, '4', '4', 4, 400, '[\"product-4-91539.png\"]', '2023-06-29 05:16:13', '2023-06-29 05:16:13', '2023-06-29 05:16:32'),
+(27, 22, 'aw aw aw', '5', 5, 500, '[\"product-aw aw aw-85194.png\"]', '2023-06-29 05:17:22', '2023-06-29 05:17:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -257,10 +282,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `username`, `password`, `email`, `address`, `mobile`, `role`, `created_at`, `updated_at`, `status`, `counterlock`, `deleted_at`) VALUES
-(14, 'admin', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@yahoo.com', 'admin', '2323232', 1, '2023-05-25 14:38:22', '2023-05-25 14:38:22', 0, 1, NULL),
+(14, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@yahoo.com', 'admin', '2323232', 1, '2023-05-25 14:38:22', '2023-05-25 14:38:22', 0, 0, NULL),
 (16, 'dsdsds', 'dsdsdsd', '5f4dcc3b5aa765d61d8327deb882cf99', 'dsdsdsdsds@yahoo.com', 'dsds', '232323', 0, '2023-05-25 15:13:05', '2023-05-25 15:13:05', 0, 0, NULL),
 (17, 'sample user', 'sample', '5f4dcc3b5aa765d61d8327deb882cf99', 'sample@yahoo.com', 'dsds', '232323', 0, '2023-05-25 15:14:05', '2023-05-25 15:14:05', 0, 0, NULL),
-(18, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 15:20:26', '2023-05-25 15:20:26', 0, 0, NULL);
+(18, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 15:20:26', '2023-05-25 15:20:26', 0, 0, NULL),
+(19, 'gf', 'gf', 'e5bb23797bfea314a3db43d07dbd6a74', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-28 05:42:25', '2023-06-28 05:42:25', 0, 1, NULL),
+(20, 'gf', 'pota', '8163680b8578a9dadaad55d668037b2f', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-28 06:32:29', '2023-06-28 06:32:29', 0, 0, NULL),
+(21, 'amaw', 'test', '098f6bcd4621d373cade4e832627b4f6', 'johndulfmendiola14@gmail.com', 'amaw', '1023214123', 0, '2023-06-28 09:12:54', '2023-06-28 09:12:54', 0, 0, NULL),
+(22, 'task', 'task', '478f3a4c51824ad23cb50c1c60670c0f', 'test@gmail.com', 'fd', '92265656', 1, '2023-06-28 13:04:13', '2023-06-28 13:04:13', 0, 1, NULL),
+(23, 'admin', 'ere', '2bbf803161deb1186defbefb8b4b0903', 'admin@gmail.com', 'admin', '09222222222', 0, '2023-06-29 04:26:16', '2023-06-29 04:26:16', 0, 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -303,25 +333,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables

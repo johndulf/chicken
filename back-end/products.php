@@ -178,7 +178,7 @@
 
   <!-- Plugins js -->
   <script src="assets/js/sidebar-menu.js"></script>
-  <script src="assets/js/notify/bootstrap-notify.min.js"></script>
+  <!-- <script src="assets/js/notify/bootstrap-notify.min.js"></script> -->
   <script src="assets/js/notify/index.js"></script>
 
   <!-- Data table js -->

@@ -185,7 +185,7 @@
     <script src="assets/js/dropzone/dropzone-script.js"></script>
 
     <!-- Plugins js -->
-    <script src="assets/js/notify/bootstrap-notify.min.js"></script>
+    <!-- <script src="assets/js/notify/bootstrap-notify.min.js"></script> -->
     <script src="assets/js/notify/index.js"></script>
 
     <!-- ck editor js -->

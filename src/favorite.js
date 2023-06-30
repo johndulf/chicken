@@ -3,6 +3,8 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+    // favorite:[],
+    // isFavoritesPage: false,
       products: [],
       carts: [],
     };
@@ -10,6 +12,9 @@ createApp({
   created() {
     this.displayFavorites();
     this.displayCarts();
+    // if (window.location.pathname === '/favorites.php') {
+    //   this.isFavoritesPage = true;
+    // }
   },
 
   computed: {

@@ -3,9 +3,11 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      // favorite:[],
       products: [],
       product: {},
       carts: [],
+      // isFavoritesPage: false,
       editQuantity: 0,
       editPrice: 0,
     };
@@ -27,6 +29,10 @@ createApp({
   created() {
     this.displayProducts();
     this.displayCarts();
+    // this.displayFavorites();
+    // if (window.location.pathname === '/favorites.php') {
+    //   this.isFavoritesPage = true;
+    // }
   },
 
   methods: {
@@ -89,7 +95,14 @@ createApp({
         }
       });
     },
-
+    // displayFavorites() {
+    //   const data = new FormData();
+    //   data.append("method", "displayFavorites");
+    //   axios.post("../api/index.php", data).then((res) => {
+    //     console.log(res.data);
+    //     this.favorite = res.data;
+    //   });
+    // },
     displayProducts() {
       const data = new FormData();
       data.append("method", "displayProducts");
@@ -105,6 +118,7 @@ createApp({
         console.log(res.data);
         if (res.data == 1) {
           this.displayProducts();
+          // this.displayFavorites();
         }
       });
     },
