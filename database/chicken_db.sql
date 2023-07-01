@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2023 at 08:04 AM
+-- Generation Time: Jul 01, 2023 at 07:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -172,7 +172,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateProduct` (IN `p_id` INT, IN `p_quantity` INT, IN `p_price` INT)   BEGIN
   UPDATE products
-  SET quantity = p_quantity, price = p_price
+  SET quantity = p_quantity, price = p_price, updated_at = now()
   WHERE id = p_id;
 END$$
 
@@ -253,7 +253,14 @@ INSERT INTO `products` (`id`, `user_id`, `name`, `description`, `quantity`, `pri
 (24, 22, '2', '2', 2, 2, '[\"product-2-55933.png\"]', '2023-06-29 05:15:50', '2023-06-29 05:15:50', '2023-06-29 05:16:39'),
 (25, 22, '2', '2', 2, 2, '[\"product-2-66068.png\"]', '2023-06-29 05:15:59', '2023-06-29 05:15:59', '2023-06-29 05:16:36'),
 (26, 22, '4', '4', 4, 400, '[\"product-4-91539.png\"]', '2023-06-29 05:16:13', '2023-06-29 05:16:13', '2023-06-29 05:16:32'),
-(27, 22, 'aw aw aw', '5', 5, 500, '[\"product-aw aw aw-85194.png\"]', '2023-06-29 05:17:22', '2023-06-29 05:17:22', NULL);
+(27, 22, 'aw aw aw', '5', 5, 500, '[\"product-aw aw aw-85194.png\"]', '2023-06-29 05:17:22', '2023-06-29 05:17:22', '2023-06-29 12:16:34'),
+(29, 22, 'admin', 'fdfd', 232, 400, '[\"product-admin-83938.jpeg\"]', '2023-06-29 11:50:44', '2023-06-29 11:50:44', '2023-06-29 12:16:38'),
+(30, 22, 'cake', 'cake', 232, 500, '[\"product-cake-85005.png\"]', '2023-06-29 12:24:34', '2023-06-29 12:24:34', '2023-06-30 02:02:15'),
+(31, 22, 'cheese', 'tam is', 3, 320, '[\"product-cheese-91244.jpeg\"]', '2023-06-29 13:13:26', '2023-06-29 13:13:26', '2023-06-30 02:02:09'),
+(32, 14, 'chicken', 'lami nga dli bidle', 500, 622, '[\"product-chicken-49338.png\"]', '2023-06-30 02:52:21', '2023-06-30 02:52:21', '2023-06-30 02:57:31'),
+(33, 14, 'gfgf', '232323', 235, 400, '[\"product-gfgf-10462.png\"]', '2023-06-30 02:59:05', '2023-06-30 02:59:05', '2023-06-30 02:59:10'),
+(34, 22, 'aw aw aw', '3232', 12, 323, '[\"product-aw aw aw-54795.png\"]', '2023-06-30 04:33:46', '2023-06-30 04:33:46', '2023-06-30 11:47:11'),
+(36, 22, 'fdfd fdfd fdfd', 'dfd', 678, 12, '[\"product-fdfd fdfd fdfd-48705.jpg\"]', '2023-06-30 11:47:59', '2023-07-01 04:43:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -282,15 +289,25 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `username`, `password`, `email`, `address`, `mobile`, `role`, `created_at`, `updated_at`, `status`, `counterlock`, `deleted_at`) VALUES
-(14, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@yahoo.com', 'admin', '2323232', 1, '2023-05-25 14:38:22', '2023-05-25 14:38:22', 0, 0, NULL),
-(16, 'dsdsds', 'dsdsdsd', '5f4dcc3b5aa765d61d8327deb882cf99', 'dsdsdsdsds@yahoo.com', 'dsds', '232323', 0, '2023-05-25 15:13:05', '2023-05-25 15:13:05', 0, 0, NULL),
-(17, 'sample user', 'sample', '5f4dcc3b5aa765d61d8327deb882cf99', 'sample@yahoo.com', 'dsds', '232323', 0, '2023-05-25 15:14:05', '2023-05-25 15:14:05', 0, 0, NULL),
-(18, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 15:20:26', '2023-05-25 15:20:26', 0, 0, NULL),
-(19, 'gf', 'gf', 'e5bb23797bfea314a3db43d07dbd6a74', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-28 05:42:25', '2023-06-28 05:42:25', 0, 1, NULL),
-(20, 'gf', 'pota', '8163680b8578a9dadaad55d668037b2f', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-28 06:32:29', '2023-06-28 06:32:29', 0, 0, NULL),
-(21, 'amaw', 'test', '098f6bcd4621d373cade4e832627b4f6', 'johndulfmendiola14@gmail.com', 'amaw', '1023214123', 0, '2023-06-28 09:12:54', '2023-06-28 09:12:54', 0, 0, NULL),
-(22, 'task', 'task', '478f3a4c51824ad23cb50c1c60670c0f', 'test@gmail.com', 'fd', '92265656', 1, '2023-06-28 13:04:13', '2023-06-28 13:04:13', 0, 1, NULL),
-(23, 'admin', 'ere', '2bbf803161deb1186defbefb8b4b0903', 'admin@gmail.com', 'admin', '09222222222', 0, '2023-06-29 04:26:16', '2023-06-29 04:26:16', 0, 0, NULL);
+(3, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@yahoo.com', 'admin', '2323232', 1, '2023-05-25 06:38:22', '2023-05-25 06:38:22', 0, 0, '2023-07-01 04:41:40'),
+(4, 'yyyyyy', 'dsdsdsd', '5f4dcc3b5aa765d61d8327deb882cf99', 'asdasdsa@gmail.com', 'dsds', '333', 0, '2023-05-25 07:13:05', '2023-05-25 07:13:05', 0, 0, '2023-07-01 05:12:24'),
+(5, 'sample user', 'sample', '5f4dcc3b5aa765d61d8327deb882cf99', 'sample2@yahoo.com', 'dsds', '232323', 0, '2023-05-25 07:14:05', '2023-05-25 07:14:05', 0, 0, NULL),
+(6, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 07:20:26', '2023-05-25 07:20:26', 0, 0, NULL),
+(7, 'gwapo123', 'gf', 'e5bb23797bfea314a3db43d07dbd6a74', 'gwapoko123@gmail.com', 'gf', '09226656', 0, '2023-06-27 21:42:25', '2023-06-30 23:11:56', 0, 1, NULL),
+(8, 'gf', 'pota', '8163680b8578a9dadaad55d668037b2f', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-27 22:32:29', '2023-06-27 22:32:29', 0, 0, NULL),
+(9, 'amaw', 'test', '098f6bcd4621d373cade4e832627b4f6', 'bitaylovephanie@gmail.com', 'amaw', '1023214123', 0, '2023-06-28 01:12:54', '2023-06-28 01:12:54', 0, 0, NULL),
+(10, 'task', 'task', '478f3a4c51824ad23cb50c1c60670c0f', 'test@gmail.com', 'fd', '92265656', 0, '2023-06-28 05:04:13', '2023-06-28 05:04:13', 0, 1, NULL),
+(11, 'giatay', 'ere', '2bbf803161deb1186defbefb8b4b0903', 'amawka@gmail.com', 'admin', '09222222222', 0, '2023-06-28 20:26:16', '2023-06-30 23:10:37', 0, 0, NULL),
+(14, 'admin', 'admins', '21232f297a57a5a743894a0e4a801fc3', 'admin@yahoo.com', 'admin', '2323232', 0, '2023-05-25 14:38:22', '2023-05-25 14:38:22', 0, 0, NULL),
+(18, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 07:20:26', '2023-05-25 07:20:26', 0, 0, '2023-07-01 02:32:22'),
+(22, 'task', 'task', '478f3a4c51824ad23cb50c1c60670c0f', 'test@gmail.com', 'fd', '92265656', 0, '2023-06-28 13:04:13', '2023-06-28 13:04:13', 0, 1, NULL),
+(45, 'dsdsds', 'dsdsdsd', '5f4dcc3b5aa765d61d8327deb882cf99', 'dsdsdsdsds@yahoo.com', 'dsds', '232323', 0, '2023-05-25 07:13:05', '2023-05-25 07:13:05', 0, 0, '2023-07-01 04:27:06'),
+(46, 'sample user', 'sample', '5f4dcc3b5aa765d61d8327deb882cf99', 'sample@yahoo.com', 'dsds', '232323', 0, '2023-05-25 07:14:05', '2023-05-25 07:14:05', 0, 0, '2023-07-01 04:13:43'),
+(78, 'dsdsd', 'dsdsds', '1a1dc91c907325c69271ddf0c944bc72', 'dsdsdsd@gmail.com', 'pass', '232', 0, '2023-05-25 07:20:26', '2023-05-25 07:20:26', 0, 0, '2023-07-01 03:54:16'),
+(87, 'gf', 'gf', 'e5bb23797bfea314a3db43d07dbd6a74', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-27 21:42:25', '2023-06-27 21:42:25', 0, 1, '2023-07-01 02:32:35'),
+(728, 'gf', 'pota', '8163680b8578a9dadaad55d668037b2f', 'sada@gmail.com', 'gf', '922266', 0, '2023-06-27 22:32:29', '2023-06-27 22:32:29', 0, 0, '2023-07-01 02:24:44'),
+(988, 'amaw', 'test', '098f6bcd4621d373cade4e832627b4f6', 'fgfgfgfgf@gmail.com', 'amaw', '1023214123', 0, '2023-06-28 01:12:54', '2023-06-28 01:12:54', 0, 0, '2023-07-01 02:09:27'),
+(7676, 'admin', 'ere', '2bbf803161deb1186defbefb8b4b0903', 'admin@gmail.com', 'admin', '09222222222', 0, '2023-06-28 20:26:16', '2023-06-28 20:26:16', 0, 0, '2023-07-01 02:09:17');
 
 --
 -- Indexes for dumped tables
@@ -333,25 +350,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7677;
 
 --
 -- Constraints for dumped tables

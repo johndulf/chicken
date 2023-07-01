@@ -103,7 +103,7 @@
 
                           <td>
                             <ul>
-                                  <a class="me-2" @click="updateUser(user)" data-bs-toggle="modal" data-bs-target="#editUser">
+                                  <a class="me-2" @click="editUser(user)" data-bs-toggle="modal" data-bs-target="#editUser">
                                     <i class="fas fa-edit" style="color: green;"></i>
                                 </a>
 

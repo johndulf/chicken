@@ -109,3 +109,36 @@ function register()
         echo 0;
     }
 }
+
+function deleteUser() {
+    global $con;
+    $id = $_POST['userId'];
+    $query = $con->prepare('UPDATE users SET deleted_at = NOW() WHERE id = ?');
+    $query->bind_param('i', $id);
+    $query->execute();
+    $query->close();
+    $con->close();
+}
+function editUser()
+{
+    global $con;
+
+    $userId = $_POST['userId'];
+    $fullname = $_POST['fullname'];
+    $mobile = $_POST['mobile'];
+    $email = strtolower($_POST['email']);
+    $updatedAt = date('Y-m-d H:i:s'); // Current timestamp
+
+    $sql = 'UPDATE users SET fullname = ?, mobile = ?, email = ?, updated_at = ?  WHERE id = ?';
+    $query = $con->prepare($sql);
+    $query->bind_param('ssssi', $fullname, $mobile, $email, $updatedAt, $userId);
+    $query->execute();
+
+    if ($query->affected_rows >= 1) {
+        echo 1;
+    } else {
+        echo 0;
+    }
+
+    $query->close();
+}
