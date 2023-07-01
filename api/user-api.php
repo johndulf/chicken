@@ -127,11 +127,10 @@ function editUser()
     $fullname = $_POST['fullname'];
     $mobile = $_POST['mobile'];
     $email = strtolower($_POST['email']);
-    $updatedAt = date('Y-m-d H:i:s'); // Current timestamp
 
-    $sql = 'UPDATE users SET fullname = ?, mobile = ?, email = ?, updated_at = ?  WHERE id = ?';
+    $sql = 'UPDATE users SET fullname = ?, mobile = ?, email = ?, updated_at = NOW() WHERE id = ?';
     $query = $con->prepare($sql);
-    $query->bind_param('ssssi', $fullname, $mobile, $email, $updatedAt, $userId);
+    $query->bind_param('sssi', $fullname, $mobile, $email, $userId);
     $query->execute();
 
     if ($query->affected_rows >= 1) {

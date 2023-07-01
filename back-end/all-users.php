@@ -85,6 +85,9 @@
                           <th>Name</th>
                           <th>Phone</th>
                           <th>Email</th>
+                          <th>Created</th>
+                          <th>Updated</th>
+                          <th>Role</th>
                           <th>Option</th>
                         </tr>
                       </thead>
@@ -100,6 +103,10 @@
                           <td>{{user.mobile}}</td>
 
                           <td>{{user.email}}</td>
+
+                          <td>{{user.created_at}}</td>
+                          <td>{{user.updated_at}}</td>
+                          <td>{{ user.role === 0 ? 'user' : (user.role === 1 ? 'admin' : user.role) }}</td>
 
                           <td>
                             <ul>
