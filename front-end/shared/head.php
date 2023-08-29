@@ -54,6 +54,19 @@
   .open {
     display: block;
   }
+  .password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    color: skyblue;
+  }
+  .password-toggle-container {
+    position: relative;
+    display: flex;
+  }
   </style>
 </head>
 
