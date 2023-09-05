@@ -47,32 +47,33 @@ include './shared/head.php';
             </div>
             <div class="modal-body" id="profile-app">
                 <form @submit.prevent="editDetails($event)">
-                    <div class="mb-4">
-                        <label for="username" class="form-label" style="font-size: 20px;">Username</label>
+                    <div class="form-group">
+                        <label for="username" style="font-size: 20px;">Username</label>
                         <input type="text" class="form-control" id="username" name="username" v-model="username">
                     </div>
-                    <div class="mb-4">
-                        <label for="fullname" class="form-label" style="font-size: 20px;">Full Name</label>
+                    <div class="form-group">
+                        <label for="fullname" style="font-size: 20px;">Full Name</label>
                         <input type="text" class="form-control" id="fullname" name="fullname" v-model="fullname">
                     </div>
-                    <div class="mb-4">
-                        <label for="address" class="form-label" style="font-size: 20px;">Address</label>
+                    <div class="form-group">
+                        <label for="address" style="font-size: 20px;">Address</label>
                         <input type="text" class="form-control" id="address" name="address" v-model="address">
                     </div>
-                    <div class="mb-4">
-                        <label for="mobile" class="form-label" style="font-size: 20px;">Mobile</label>
+                    <div class="form-group">
+                        <label for="mobile" style="font-size: 20px;">Mobile</label>
                         <input type="text" class="form-control" id="mobile" name="mobile" v-model="mobile">
                     </div>
-                    <div class="mb-4">
-                        <label for="email" class="form-label" style="font-size: 20px;">Email</label>
+                    <div class="form-group">
+                        <label for="email" style="font-size: 20px;">Email</label>
                         <input type="text" class="form-control" id="email" name="email" v-model="email">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="font-size:20px; background:green;" >Save Changes</button>
+                    <button type="submit" class="btn btn-primary" style="font-size:20px; background:green;">Save Changes</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 
 
         <!-- Change Password Modal ----->
@@ -85,7 +86,7 @@ include './shared/head.php';
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" id="app">
                         <form @submit.prevent="changePassword($event)">
                         <div class="mb-3">
                             <label for="current-password" class="form-label" style="font-size: 20px; font-family: emoji;">Current Password</label>
@@ -128,7 +129,89 @@ include './shared/head.php';
 
 <script src="../src/product.js"></script>
 
+<script>
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        username: '<?=  isset($_SESSION['id']) ?  $_SESSION['user']['username']  : '' ?>',
+                        fullname: '<?php echo $fullname; ?>',
+                        address: '<?php echo $address; ?>',
+                        mobile: '<?php echo $mobile; ?>',
+                        email: '<?php echo $email; ?>',
+                        currentPassword: '',
+                        newPassword: '',
+                        confirmPassword: ''
+                    };
+                },
+                methods: {
+                    saveChanges(e) {
+                        e.preventDefault();
+                        const form = e.target;
+                        const formData = new FormData(form);
+                        formData.append('method', 'fnUpdateProfile');
 
+                        axios
+                            .post('model/userModel.php', formData)
+                            .then(response => {
+                                console.log(response);
+                                if (response.data === 1) {
+                                    alert("Your Personal Information Has Been Updated");
+                                    window.location.reload();
+                                } else {
+                                    alert("There was an error updating your user!");
+                                    console.log(response.data); // Display the error message from the server
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                alert("An error occurred while updating your user.");
+                            });
+                    },
+
+                    changePassword(e) {
+                        e.preventDefault();
+                        const form = e.target;
+
+                        if (this.newPassword !== this.confirmPassword) {
+                            alert("New password and confirmation password do not match.");
+                            return;
+                        }
+
+                        const formData = new FormData();
+                        formData.append('currentPassword', this.currentPassword);
+                        formData.append('newPassword', this.newPassword);
+                        formData.append('confirmPassword', this.confirmPassword);
+                        formData.append('method', 'fnChangePassword');
+
+                        axios
+                            .post('model/userModel.php', formData)
+                            .then(response => {
+                                console.log(response);
+                                const responseData = response.data;
+                                if (responseData === 'success') {
+                                    alert("Your password has been changed successfully.");
+                                    window.location.reload();
+                                    this.currentPassword = '';
+                                    this.newPassword = '';
+                                    this.confirmPassword = '';
+                                } else if (responseData === 'passwordMismatch') {
+                                    alert("New password and confirm password do not match.");
+                                } else if (responseData === 'currentPasswordMismatch') {
+                                    alert("Current password does not match.");
+                                } else {
+                                    console.log(responseData);
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    }
+                },
+                created() {}
+            });
+
+            app.mount('#profile-app');
+        </script>
 <script>
                                 const toggleCurrentPassword = document.querySelector("#toggleCurrentPassword");
                                 const toggleNewPassword = document.querySelector("#toggleNewPassword");

@@ -1,4 +1,4 @@
-<?php include './shared/head.php'; 
+<?php include './shared/loginhead.php'; 
 ?>
 
 <div id="app">
@@ -8,128 +8,81 @@
         } else if(isset($_SESSION['id']) && $_SESSION['user']['role'] == 1) {
             header('location: ../back-end.php/index.php');
         }
-        include './shared/header.php';
-        include './shared/mobile-header.php';
+          
         ?>
 
   <!-- Breadcrumb Section Start -->
-  <section class="breadscrumb-section pt-0">
-    <div class="container-fluid-lg">
-      <div class="row">
-        <div class="col-12">
-          <div class="breadscrumb-contain">
-            <h2 class="mb-2">Log In</h2>
-            <nav>
-              <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item">
-                  <a href="index.php">
-                    <i class="fa-solid fa-house"></i>
-                  </a>
-                </li>
-                <li class="breadcrumb-item active">Log In</li>
-              </ol>
-            </nav>
-          </div>
+  <div class="login-container">
+        <div class="left-side">
+            <!-- Place your chicken shop logo here -->
+            <img class="logo" src="../assets/images/friedlogo1.jpg" alt="Chicken Shop Logo">
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- Breadcrumb Section End -->
-
-  <!-- log in section start -->
-  <section class="log-in-section background-image-2 section-b-space">
-    <div class="container-fluid-lg w-100">
-      <div class="row">
-        <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
-          <div class="image-contain">
-            <img src="../assets/images/friedlogo1.jpg" class="img-fluid"
-              alt="">
-          </div>
-        </div>
-
-        <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
-          <div class="log-in-box">
-            <div class="log-in-title">
-              <h3>Welcome To CFC</h3>
-              <h4>Log In Your Account</h4>
+        <div class="right-side" >
+            <div class="login-form" >
+            <h2 class="typing-text">Welcome to Chicken Shop<span class="cursor"></span></h2>
+                <form @submit='login'>
+                    <div class="form-group">
+                        <input type="email" name="username" required>
+                        <label for="username">Email</label>
+                    </div>
+                    
+                                <div class="form-group">
+                <input type="password" name="password" id="idpassword" required>
+                <label for="password">Password</label>
+                <span class="password-toggle" onclick="togglePasswordVisibility()">
+                    <i class="fas fa-eye"></i>
+                </span>
+                <p  class="error"id="message error"> {{error}} </p>
             </div>
 
-            <div class="input-box">
-              <form @submit='login' class="row g-4">
-                <div class="col-12">
-                  <div class="form-floating theme-form-floating log-in-form">
-                    <input type="text" class="form-control" name="username"
-                      placeholder="Email Address">
-                    <label for="email">Username</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-floating theme-form-floating log-in-form">
-                    <input type="password" class="form-control" name="password" id="idpassword"
-                      placeholder="Password">
-                      <i class="fa-regular fa-eye" id="togglePassword" style="position: absolute; right: 20px; top: 20px; cursor: pointer;"></i>
-                    <label for="password">Password</label>
-                  </div>
-                </div>
 
-                <div class="col-12">
-                  <button class="btn btn-animation w-100 justify-content-center"
-                    type="submit">Log
-                    In</button><span id="message error"> {{error}} </span>
-                  
-                </div>
-              </form>
+                    <div class="button-container">
+                        <button type="submit">Login</button>
+                           <a class="forgot-password" onclick="location.href='sign-up.php';">Sign Up</a>
+                    </div>
+                </form>
+                <a href="#" class="forgot-password">Forgot Password?</a>
             </div>
-
-            <div class="sign-up-box">
-              <h4>Don't have an account?</h4>
-              <a href="sign-up.php">Sign Up</a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
-  <!-- log in section end -->
 
-  <!-- Footer Section Start -->
-  <?php include './shared/footer.php'; ?>
-  <!-- Footer Section End -->
+   
 
-  <!-- Tap to top start -->
-  <div class="theme-option">
-
-    <div class="back-to-top">
-      <a id="back-to-top" href="#">
-        <i data-feather="chevron-up" class="text-white"></i>
-      </a>
-    </div>
-  </div>
-  <!-- Tap to top end -->
-
-  <!-- Bg overlay Start -->
-  <div class="bg-overlay"></div>
-  <!-- Bg overlay End -->
-</div>
 
 <?php include './shared/scripts.php'; ?>
 <script src="../src/user.js"></script>
 
 <script>
+        // JavaScript to add 'has-content' class to form fields with content
+        const formFields = document.querySelectorAll('input[type="email"], input[type="password"]');
 
-const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#idpassword");
-
-        togglePassword.addEventListener("click", function () {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-            
-            // toggle the icon
-            this.classList.toggle("bi-eye");
+        formFields.forEach((field) => {
+            field.addEventListener('input', () => {
+                if (field.value !== '') {
+                    field.classList.add('has-content');
+                } else {
+                    field.classList.remove('has-content');
+                }
+            });
         });
 
-</script>
+        function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('idpassword');
+        const toggleIcon = document.querySelector('.password-toggle i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+    
+
+    </script>
 
 </body>
 

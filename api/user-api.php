@@ -110,6 +110,42 @@ function register()
     }
 }
 
+function fnChangePassword() {
+    global $con;
+    $user_id = $_SESSION['id'];
+  
+    $currentPassword = md5($_POST['currentPassword']);
+    $newPassword = md5($_POST['newPassword']);
+    $confirmPassword = md5($_POST['confirmPassword']);
+
+    if ($newPassword !== $confirmPassword) {
+      echo 'passwordMismatch'; 
+      exit;
+    }
+  
+    
+    $query = $con->prepare('SELECT password FROM users WHERE id = ?');
+    $query->bind_param('i', $user_id);
+    $query->execute();
+    $result = $query->get_result()->fetch_assoc();
+  
+    // Compare the current password with the one retrieved from the database
+    if (!$result || $currentPassword !== $result['password']) {
+      echo 'currentPasswordMismatch'; // Current password does not match
+      exit;
+    }
+  
+    // Update the password in the database
+    $query = $con->prepare('UPDATE users SET password = ? WHERE id = ?');
+    $query->bind_param('si', $newPassword, $user_id);
+  
+    if ($query->execute()) {
+      echo 'success'; 
+    } else {
+      echo 'error'; 
+    }
+}
+
 function deleteUser() {
     global $con;
     $id = $_POST['userId'];
