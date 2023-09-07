@@ -4,6 +4,9 @@ createApp({
   data() {
     return {
       user: {},
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
       error: ""
     };
   },
@@ -39,6 +42,44 @@ createApp({
         }
       });
     },
+    changePassword(e) {
+      e.preventDefault();
+      const form = e.target;
+
+      if (this.newPassword !== this.confirmPassword) {
+          alert("New password and confirmation password do not match.");
+          return;
+      }
+
+      const formData = new FormData();
+      formData.append('currentPassword', this.currentPassword);
+      formData.append('newPassword', this.newPassword);
+      formData.append('confirmPassword', this.confirmPassword);
+      formData.append('method', 'fnChangePassword');
+
+      axios
+          .post('../api/user-api.php', formData)
+          .then(response => {
+              console.log(response);
+              const responseData = response.data;
+              if (responseData === 'success') {
+                  alert("Your password has been changed successfully.");
+                  // window.location.reload();
+                  this.currentPassword = '';
+                  this.newPassword = '';
+                  this.confirmPassword = '';
+              } else if (responseData === 'passwordMismatch') {
+                  alert("New password and confirm password do not match.");
+              } else if (responseData === 'currentPasswordMismatch') {
+                  alert("Current password does not match.");
+              } else {
+                  console.log(responseData);
+              }
+          })
+          .catch(error => {
+              console.log(error);
+          });
+  },
     register(e) {
       e.preventDefault();
       if(e.target.password.value != e.target.confirm_password.value) {

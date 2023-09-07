@@ -130,7 +130,7 @@
                       <i data-feather="user"></i>
                     </div>
                     <div class="delivery-detail">
-                      <h6>Hello,</h6>
+                      <h6>Hello</h6>
                       <h5><?=  isset($_SESSION['id']) ?  $_SESSION['user']['fullname']  : '' ?></h5>
                     </div>
                   </div>

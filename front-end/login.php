@@ -15,11 +15,11 @@
   <div class="login-container">
         <div class="left-side">
             <!-- Place your chicken shop logo here -->
-            <img class="logo" src="../assets/images/friedlogo1.jpg" alt="Chicken Shop Logo">
+            <a href="index.php"><img class="logo" src="../assets/images/friedlogo1.jpg" alt="Chicken Shop Logo"></a>
         </div>
         <div class="right-side" >
             <div class="login-form" >
-            <h2 class="typing-text">Welcome to Chicken Shop<span class="cursor"></span></h2>
+            <h2 class="typing-text">Welcome to CJ Fried Chicken<span class="cursor"></span></h2>
                 <form @submit='login'>
                     <div class="form-group">
                         <input type="email" name="username" required>

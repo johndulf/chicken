@@ -7,7 +7,7 @@
 
 
         <!-- Breadcrumb Section Start -->
-        <section class="breadscrumb-section pt-0">
+        <!-- <section class="breadscrumb-section pt-0">
             <div class="container-fluid-lg">
                 <div class="row">
                     <div class="col-12">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- Breadcrumb Section End -->
 
         <!-- log in section start -->

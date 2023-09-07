@@ -93,18 +93,21 @@
               <li>
                 <a href="index.php" class="text-content">Home</a>
               </li>
-              <!-- <li>
-                <a href="shop-left-sidebar.html" class="text-content">Shop</a>
+              <li>
+              <a href="https://www.facebook.com" class="text-content">
+              <i class="fab fa-facebook text-primary"></i>
+              Facebook
+            </a>
               </li>
               <li>
-                <a href="about-us.html" class="text-content">About Us</a>
+              <a href="https://www.instagram.com" class="text-content">
+                <i class="fab fa-instagram text-danger"></i>
+                Instagram</a>
               </li>
               <li>
-                <a href="blog-list.html" class="text-content">Blog</a>
+              <a href="https://www.twitter.com" class="text-content">
+                <i class="fab fa-twitter text-primary" style="font-size:12px;"></i>Twitter</a>
               </li>
-              <li>
-                <a href="contact-us.html" class="text-content">Contact Us</a>
-              </li> -->
             </ul>
           </div>
         </div>
@@ -141,7 +144,29 @@
           </div>
         </div>
 
-        <div class="col-xl-3 col-lg-4 col-sm-6">
+        <div class="col-xl col-lg-2 col-sm-3">
+          <div class="footer-title">
+            <h4>Email</h4>
+          </div>
+
+          <div class="footer-contact">
+            <ul>
+              <li>
+                <div class="footer-number">
+                  <i data-feather="mail"></i>
+                  <div class="contact-number">
+                  <h6 class="text-content">Email Address :</h6>
+                  <h5>rena@gmail.com</h5>
+                    <h5>ross@gmail.com</h5>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-1 col-sm-2">
           <div class="footer-title">
             <h4>Contact Us</h4>
           </div>
@@ -155,17 +180,6 @@
                     <h6 class="text-content">Hotline 24/7 :</h6>
                     <h5>+63 99 9500 5669</h5>
                     <h5>+63 99 9500 5669</h5>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="footer-number">
-                  <i data-feather="mail"></i>
-                  <div class="contact-number">
-                    <h6 class="text-content">Email Address :</h6>
-                    <h5>rena@gmail.com</h5>
-                    <h5>ross@gmail.com</h5>
                   </div>
                 </div>
               </li>
